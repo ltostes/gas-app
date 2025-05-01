@@ -1,0 +1,29 @@
+.wrapper {
+    /* padding: 64px 32px; */
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.inputWrapper {
+    color-scheme: light;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: baseline;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    min-height: 3rem;
+}
+
+.label {
+    color: hsl(0 0% 40%);
+    flex-basis: 160px;
+    text-align: right;
+    font-weight: 700;
+}
