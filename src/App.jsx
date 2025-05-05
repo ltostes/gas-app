@@ -51,15 +51,16 @@ function App() {
       <CardsPanel>
         <NewEntryButton callback={toggleNewEntryDialog}/>
         {
-          data?.map((d) => <Card>{d}</Card>)
+          data?.map((d) => <Card key={d}>{d}</Card>)
         }
       </CardsPanel>
       <div style={{
         position: 'absolute',
-        top: '10px',
-        left: '10px',
+        top: '5px',
+        right: '5px',
         width: '10px',
         height: '10px',
+        borderRadius: '100%',
         background: statusBackground
       }}/>
     </>
