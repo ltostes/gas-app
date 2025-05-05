@@ -29,7 +29,7 @@ function DataProvider({children}) {
   }, [isLoading]);
 
   const dataAdd = React.useCallback(async (newEntry) => {
-    const nextData = [...data, newEntry]
+    const nextData = data ? [...data, newEntry] : [newEntry]
     console.log("DATA ADD")
     console.log({data, nextData, newEntry})
     await APIdataSet({data: nextData, name, code});
