@@ -36,7 +36,7 @@ function AuthForm({ submitCallback }) {
       <div className={styles.row}>
         <div className={styles.inputWrapper}>
           <label 
-            htmlFor='code'
+            htmlFor='code-field'
             className={styles.label}
             >
             Code:
@@ -53,7 +53,7 @@ function AuthForm({ submitCallback }) {
       <div className={styles.row}>
         <div className={styles.inputWrapper}>
           <label 
-            htmlFor='name'
+            htmlFor='name-field'
             className={styles.label}
             >
             Name:
