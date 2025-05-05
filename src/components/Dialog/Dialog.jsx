@@ -5,7 +5,7 @@ import useKeyDown from '../../hooks/use-keydown';
 
 import styles from './Dialog.module.css';
 
-function Dialog({ handleDismiss, enableClose, children }) {
+function Dialog({ handleDismiss, enableClose = true, children }) {
   useKeyDown('Escape', () => enableClose && handleDismiss());
 
   return (

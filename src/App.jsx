@@ -7,39 +7,61 @@ import Dialog from './components/Dialog';
 import CardsPanel from './components/CardsPanel'
 import Card from './components/Card'
 import { AuthContext } from './components/AuthProvider';
+import { DataContext } from './components/DataProvider';
 
 import useToggle from './hooks/use-toggle';
+import NewEntryButton from './components/NewEntryButton/NewEntryButton';
+import NewEntryForm from './components/NewEntryForm/NewEntryForm';
 
 function App() {
   const { name } = React.useContext(AuthContext)
+  const { data, error, isLoading} = React.useContext(DataContext)
   
-  const [showDialog, toggleDialog, setShowDialog] = useToggle(false);
+  const [showAuthDialog, toggleAuthDialog, setShowAuthDialog] = useToggle(false);
+  const [showNewEntryDialog, toggleNewEntryDialog, setShowNewEntryDialog] = useToggle(false);
   
   const isLogged = React.useMemo(() => !(name == ''), [name]);
 
   React.useEffect(() => {
-    setShowDialog(!isLogged);
+    setShowAuthDialog(!isLogged);
   }, [isLogged])
 
+  const statusBackground = isLoading ? 'yellow' : 'green'
 
   return (
     <>
-      <LoggedInfo callback={toggleDialog}/>
+      <LoggedInfo callback={toggleAuthDialog}/>
       {
-        showDialog && 
+        showAuthDialog && 
           <Dialog 
-            handleDismiss={toggleDialog}
+            handleDismiss={toggleAuthDialog}
             enableClose={isLogged}
             >
-            <AuthForm submitCallback={toggleDialog}/>
+            <AuthForm submitCallback={toggleAuthDialog}/>
+          </Dialog>
+      }
+      {
+        showNewEntryDialog && 
+          <Dialog 
+            handleDismiss={toggleNewEntryDialog}
+            >
+            <NewEntryForm submitCallback={toggleNewEntryDialog}/>
           </Dialog>
       }
       <CardsPanel>
-        <Card>Oi</Card>
-        <Card>Voce</Card>
-        <Card>Como</Card>
-        <Card>Vai</Card>
+        <NewEntryButton callback={toggleNewEntryDialog}/>
+        {
+          data?.map((d) => <Card>{d}</Card>)
+        }
       </CardsPanel>
+      <div style={{
+        position: 'absolute',
+        top: '10px',
+        left: '10px',
+        width: '10px',
+        height: '10px',
+        background: statusBackground
+      }}/>
     </>
   )
 }
