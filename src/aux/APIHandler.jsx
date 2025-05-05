@@ -24,13 +24,11 @@ export async function APIdataSet({data, name, code}) {
     
     const body = JSON.stringify(data);
     
-    console.log("API DATA SET")
-    console.log({name, code, data, params, body})
     const response = await fetch(`${SET_ENDPOINT}?${params}`, {
       method: "POST",
       body
     });
-    console.log({response})
+    
     const json = await response.json();
 
     return json;

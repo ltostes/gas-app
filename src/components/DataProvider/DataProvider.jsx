@@ -17,21 +17,11 @@ function DataProvider({children}) {
   const {data, error, isLoading, mutate } = useSWR(GET_ENDPOINT, dataFetch);
 
   React.useEffect(() => {
-    console.log({what: 'data update', data});
-  }, [data]);
-
-  React.useEffect(() => {
     mutate();
   }, [name, code]);
 
-  React.useEffect(() => {
-    console.log({isLoading})
-  }, [isLoading]);
-
   const dataAdd = React.useCallback(async (newEntry) => {
     const nextData = data ? [...data, newEntry] : [newEntry]
-    console.log("DATA ADD")
-    console.log({data, nextData, newEntry})
     await APIdataSet({data: nextData, name, code});
     mutate(nextData);
   },[name, code, data]);
