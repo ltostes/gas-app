@@ -9,10 +9,10 @@ config({ path: '.env.local' });
 const redis = Redis.fromEnv();
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const { id  } = req.query;
+  const { key  } = req.query;
   const payload = req.body;
 
-  const val = await redis.set(id.toString(), payload);
+  const val = await redis.set(key.toString(), payload);
 
   res.writeHead(200);
   const response = JSON.stringify(val);
