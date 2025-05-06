@@ -14,7 +14,7 @@ function DataProvider({children}) {
     return ret;
   },[name, code]);
 
-  const {data, error, isLoading, mutate } = useSWR(GET_ENDPOINT, dataFetch);
+  const {data, error, isLoading, isValidating, mutate } = useSWR(GET_ENDPOINT, dataFetch);
 
   React.useEffect(() => {
     mutate();
@@ -30,6 +30,7 @@ function DataProvider({children}) {
     data,
     dataAdd,
     isLoading,
+    isValidating,
     error
   };
 

@@ -33,6 +33,23 @@ function AuthForm({ submitCallback }) {
     className={styles.wrapper}
     onSubmit={handleSubmit}
     >
+    <div className={styles.row}>
+      <div className={styles.inputWrapper}>
+        <label 
+          htmlFor='name-field'
+          className={styles.label}
+          >
+          Name:
+        </label>
+        <input
+          id="name-field"
+          className={styles.textInput}
+          value={inputName}
+          onChange={(event) => setInputName(event.target.value)}
+          >
+        </input>
+      </div>
+    </div>
       <div className={styles.row}>
         <div className={styles.inputWrapper}>
           <label 
@@ -46,23 +63,6 @@ function AuthForm({ submitCallback }) {
             className={styles.textInput}
             value={inputCode}
             onChange={(event) => setInputCode(event.target.value)}
-            >
-          </input>
-        </div>
-      </div>
-      <div className={styles.row}>
-        <div className={styles.inputWrapper}>
-          <label 
-            htmlFor='name-field'
-            className={styles.label}
-            >
-            Name:
-          </label>
-          <input
-            id="name-field"
-            className={styles.textInput}
-            value={inputName}
-            onChange={(event) => setInputName(event.target.value)}
             >
           </input>
         </div>
