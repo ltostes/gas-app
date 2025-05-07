@@ -152,7 +152,7 @@ function NewEntryDialog({ loading }) {
               htmlInput : {
                 step:0.01,
                 min: 0,
-                max: 100,
+                max: 500,
               },
               input: {
                 startAdornment: <InputAdornment position="start">R$</InputAdornment>,
@@ -171,7 +171,7 @@ function NewEntryDialog({ loading }) {
               htmlInput : {
                 step:0.001,
                 min: 0,
-                max: 500,
+                max: 100,
               },
               input: {
                 endAdornment: <InputAdornment 
