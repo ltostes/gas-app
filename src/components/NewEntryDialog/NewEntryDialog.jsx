@@ -9,17 +9,15 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Input, Button as MUIButton, Stack } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
-import { yellow } from '@mui/material/colors';
+import { IconButton, Button as MUIButton, Stack } from '@mui/material';
+import { Add } from '@mui/icons-material';
 
 import Button from '../Button';
 
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-import NewEntryTextField from '../NewEntryTextField/NewEntryTextField';
 import { DataContext } from '../DataProvider';
-import { AspectRatio } from '@radix-ui/themes';
 
 const gasTypeStdOptions = [
   'Gasolina Comum',
@@ -84,16 +82,23 @@ function NewEntryDialog({ loading }) {
 
   return (
     <>
-      <Button 
+      <IconButton 
         onClick={handleClickOpen}
-        style={{
-          backgroundColor: yellow[700], 
-          color: 'black',
-          aspectRatio: 1
+        // color='secondary'
+        loading={loading}
+        sx={{
+          color: 'primary.main',
+          bgcolor: 'secondary.main',
+          transition: 'all 0.3s ease',
+          '&:hover': {
+            bgcolor: 'secondary.main', // Darker shade of secondary
+            color: 'primary.main', // Lighter shade of primary
+            transform: 'scale(1.1)'
+          }
         }}
       >
-        +
-      </Button>
+        <Add />
+      </IconButton>
       <Dialog
         open={open}
         onClose={handleClose}
