@@ -1,15 +1,16 @@
 import React from 'react';
 
 import styles from './Button.module.css'
+import { Button as MUIButton } from '@mui/material';
 
 function Button({ children, ...delegated }) {
   return (
-    <button
-      className={styles.button}
+    <MUIButton
+      // className={styles.button}
       {...delegated}
       >
         {children}
-    </button>
+    </MUIButton>
   );
 }
 
