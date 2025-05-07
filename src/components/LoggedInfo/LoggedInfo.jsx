@@ -14,6 +14,8 @@ function LoggedInfo({callback}) {
       className={styles.loggedInfo}
     >
       <Button 
+        color='secondary'
+        variant='outlined'
         onClick={callback}
         >
         <strong>{name || 'Loading...'}</strong>
