@@ -48,7 +48,6 @@ function NewEntryDialog({ loading }) {
   function handleSubmit(event) {
     event.preventDefault();
     const newEntry = {date, station, cost, liters, kilometers, gasType};
-    console.log(newEntry);
     dataAdd(newEntry);
   }
 
@@ -59,6 +58,8 @@ function NewEntryDialog({ loading }) {
       && liters > 0
       && kilometers > 0
   )
+
+  const stationOptions = data.map(({station}) => station);
 
   return (
     <>
@@ -99,7 +100,7 @@ function NewEntryDialog({ loading }) {
             disablePortal
             size={inputSizeStd}
             freeSolo
-            options={['Posto 1', 'Posto 2']}
+            options={stationOptions}
             value={station}
             onChange={(event, newValue) => setStation(newValue)}
             renderInput={(params) => <TextField 
