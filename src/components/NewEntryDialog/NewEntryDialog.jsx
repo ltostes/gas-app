@@ -11,6 +11,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Input, Button as MUIButton, Stack } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
+import { yellow } from '@mui/material/colors';
 
 import Button from '../Button';
 
@@ -53,20 +54,26 @@ function NewEntryDialog({ loading }) {
 
   const isSubmittable = (
       true
-      && station != ''
+      && station
       && cost > 0
       && liters > 0
       && kilometers > 0
   )
 
-  const stationOptions = data.map(({station}) => station);
+  const stationOptions = React.useMemo(() => {
+    const rawStations = data?.map(({station}) => station).filter(f => f);
+    const uniqueStations = [...new Set(rawStations)];
+
+    return uniqueStations
+  }
+  , [data]);
 
   return (
     <>
       <Button 
         onClick={handleClickOpen}
         style={{
-          backgroundColor: 'hsl(45 100% 50%)', 
+          backgroundColor: yellow[700], 
           color: 'black',
           aspectRatio: 1
         }}
@@ -129,7 +136,7 @@ function NewEntryDialog({ loading }) {
             type='number'
             slotProps={{
               htmlInput : {
-                step:5,
+                step:0.01,
                 min: 0,
                 max: 100,
               },
@@ -148,7 +155,7 @@ function NewEntryDialog({ loading }) {
             onChange={(event) => setLiters(event.target.value)}
             slotProps={{
               htmlInput : {
-                step:0.5,
+                step:0.001,
                 min: 0,
                 max: 500,
               },
@@ -170,7 +177,7 @@ function NewEntryDialog({ loading }) {
             onChange={(event) => setKilometers(event.target.value)}
             slotProps={{
               htmlInput : {
-                step:100,
+                step:1,
                 min: 0,
               },
               input: {
