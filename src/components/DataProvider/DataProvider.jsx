@@ -6,11 +6,33 @@ import { APIdataFetch, APIdataSet, GET_ENDPOINT } from '../../aux/APIHandler';
 
 export const DataContext = React.createContext();
 
+const dataParser = ({
+  id,
+  date,
+  station,
+  gasType,
+  cost,
+  liters,
+  kilometers
+}) => ({
+  id,
+  date: new Date(date),
+  station,
+  gasType,
+  cost: +cost,
+  liters: +liters,
+  kilometers: +kilometers
+});
+
 function DataProvider({children}) {
   const { name, code } = React.useContext(AuthContext)
 
   const dataFetch = React.useCallback(async () => {
-    const ret = await APIdataFetch({name, code});
+    const raw = await APIdataFetch({name, code});
+
+    const ret = raw.map(dataParser)
+    console.log({raw, ret})
+
     return ret;
   },[name, code]);
 
