@@ -11,13 +11,18 @@ function RegisterCard({data}) {
     gasType,
     cost,
     liters,
-    kilometers
+    kilometers,
+    efficiency
   } = data;
+
+  console.log({data})
+
+  const minHeight = efficiency ? 13 : 12
 
   const formattedDate = d3.timeFormat('%Y-%m-%d')(date);
 
   return (
-    <MUICard sx={{minWidth: 250, minHeight: 190}}>
+    <MUICard sx={{minWidth: 250, minHeight: `${minHeight}em`}}>
       <CardContent>
       <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
         {formattedDate}
@@ -32,7 +37,7 @@ function RegisterCard({data}) {
           {d3.format(".1f")(liters) + " Litros"}
           <br />
           {d3.format(",.0f")(kilometers) + " Km"}
-          <br />
+          {efficiency ? (<><br />{d3.format(".1f")(efficiency) + " Km/L"}</>) : ''}
         </Typography>
       </CardContent>
     </MUICard>

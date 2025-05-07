@@ -24,8 +24,7 @@ import { AspectRatio } from '@radix-ui/themes';
 const gasTypeStdOptions = [
   'Gasolina Comum',
   'Álcool',
-  'Gasolina Aditivada',
-  'Diesel'
+  'Gasolina Aditivada'
 ]
 
 const inputSizeStd = 'small';
@@ -39,17 +38,31 @@ function NewEntryDialog({ loading }) {
   const { data, dataAdd } = React.useContext(DataContext)
   const today = new Date();
 
-  const [date, setDate] = React.useState(today);
-  const [station, setStation] = React.useState('');
-  const [cost, setCost] = React.useState(0);
-  const [liters, setLiters] = React.useState(0);
-  const [kilometers, setKilometers] = React.useState(0);
-  const [gasType, setGasType] = React.useState(gasTypeStdOptions[0]);
+  const stdValues = React.useMemo(() => ({date: today, station: '', cost: 0, liters: 0, kilometers: 0, gasType: gasTypeStdOptions[0], efficiency: ''}),[])
+
+  const [date, setDate] = React.useState(stdValues.date);
+  const [station, setStation] = React.useState(stdValues.station);
+  const [cost, setCost] = React.useState(stdValues.cost);
+  const [liters, setLiters] = React.useState(stdValues.liters);
+  const [kilometers, setKilometers] = React.useState(stdValues.kilometers);
+  const [gasType, setGasType] = React.useState(stdValues.gasType);
+  const [efficiency, setEfficiency] = React.useState(stdValues.efficiency);
+
+  function clearFields() {
+    setDate(stdValues.date);
+    setStation(stdValues.station);
+    setCost(stdValues.cost);
+    setLiters(stdValues.liters);
+    setKilometers(stdValues.kilometers);
+    setGasType(stdValues.gasType);
+    setEfficiency(stdValues.efficiency);
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
-    const newEntry = {date, station, cost, liters, kilometers, gasType};
+    const newEntry = {date, station, cost, liters, kilometers, gasType, efficiency};
     dataAdd(newEntry);
+    clearFields();
     handleClose();
   }
 
@@ -91,7 +104,7 @@ function NewEntryDialog({ loading }) {
           }
         }}
       >
-        {/* <DialogTitle>Dadsds</DialogTitle> */}
+        <DialogTitle>Tô abastecendo!</DialogTitle>
         <DialogContent>
           <Stack
             direction='column'
@@ -186,6 +199,28 @@ function NewEntryDialog({ loading }) {
                 position="start"
                 sx={{marginLeft: 1}}
                 >Km</InputAdornment>,
+              },
+            }}
+            size={inputSizeStd}
+          />
+          <TextField 
+            label='Eficiência'
+            helperText="(caso disponível)"
+            margin='normal'
+            type='number'
+            placeholder=''
+            value={efficiency}
+            onChange={(event) => setEfficiency(event.target.value)}
+            slotProps={{
+              htmlInput : {
+                step:0.1,
+                min: 0,
+              },
+              input: {
+                endAdornment: <InputAdornment 
+                position="start"
+                sx={{marginLeft: 2}}
+                >Km/L</InputAdornment>,
               },
             }}
             size={inputSizeStd}

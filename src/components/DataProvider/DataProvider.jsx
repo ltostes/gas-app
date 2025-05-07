@@ -13,7 +13,8 @@ const dataParser = ({
   gasType,
   cost,
   liters,
-  kilometers
+  kilometers,
+  efficiency
 }) => ({
   id,
   date: new Date(date),
@@ -21,7 +22,8 @@ const dataParser = ({
   gasType,
   cost: +cost,
   liters: +liters,
-  kilometers: +kilometers
+  kilometers: +kilometers,
+  efficiency: +efficiency
 });
 
 function DataProvider({children}) {
