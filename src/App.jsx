@@ -11,6 +11,7 @@ import useToggle from './hooks/use-toggle';
 
 import NewEntryDialog from './components/NewEntryDialog/NewEntryDialog';
 import RegisterCard from './components/RegisterCard/RegisterCard';
+import { CircularProgress } from '@mui/material';
 
 function App() {
   const { name } = React.useContext(AuthContext)
@@ -37,9 +38,12 @@ function App() {
           </Dialog>
       }
       <CardsPanel>
-        <NewEntryDialog
-          loading={isLoading || isValidating}
-          />
+        {
+          (isLoading || isValidating || error) ? 
+          <CircularProgress /> 
+          :
+          <NewEntryDialog />
+        }
         {
           data?.map((d) => <RegisterCard key={d.id} data={d}/>)
         }
