@@ -20,7 +20,9 @@ function DataProvider({children}) {
     mutate();
   }, [name, code]);
 
-  const dataAdd = React.useCallback(async (newEntry) => {
+  const dataAdd = React.useCallback(async (newEntryInput) => {
+    const id = crypto.randomUUID();
+    const newEntry = {id, ...newEntryInput};
     const nextData = data ? [...data, newEntry] : [newEntry]
     await APIdataSet({data: nextData, name, code});
     mutate(nextData);
