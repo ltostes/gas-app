@@ -4,14 +4,12 @@ import LoggedInfo from './components/LoggedInfo';
 import AuthForm from './components/AuthForm';
 import Dialog from './components/Dialog';
 import CardsPanel from './components/CardsPanel'
-import Card from './components/Card'
 import { AuthContext } from './components/AuthProvider';
 import { DataContext } from './components/DataProvider';
 
 import useToggle from './hooks/use-toggle';
 
 import NewEntryDialog from './components/NewEntryDialog/NewEntryDialog';
-import { Flex } from '@radix-ui/themes';
 import RegisterCard from './components/RegisterCard/RegisterCard';
 
 function App() {
