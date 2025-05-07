@@ -5,7 +5,7 @@ function RegisterCard({data}) {
   return (
     <Card>
       {Object.entries(data).map(([key, value]) => (
-        <><span><strong>{key}: </strong>{value}</span><br/></>
+        <span key={key}><strong>{key}: </strong>{value.toString()}</span>
       ))}
     </Card>
   )

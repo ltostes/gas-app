@@ -43,7 +43,7 @@ function App() {
           loading={isLoading || isValidating}
           />
         {
-          data?.map((d) => <RegisterCard data={d}/>)
+          data?.map((d) => <RegisterCard key={d.id} data={d}/>)
         }
       </CardsPanel>
       
