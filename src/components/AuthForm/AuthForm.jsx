@@ -77,7 +77,10 @@ function AuthForm({ submitCallback }) {
         {/* <Button>
           Check
         </Button> */}
-        <Button>
+        <Button
+          variant='contained'
+          type='submit'
+        >
           Ok!
         </Button>
       </div>
