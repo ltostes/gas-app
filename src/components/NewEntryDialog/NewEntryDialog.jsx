@@ -50,6 +50,7 @@ function NewEntryDialog({ loading }) {
     event.preventDefault();
     const newEntry = {date, station, cost, liters, kilometers, gasType};
     dataAdd(newEntry);
+    handleClose();
   }
 
   const isSubmittable = (

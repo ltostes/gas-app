@@ -39,7 +39,7 @@ function DataProvider({children}) {
   const {data, error, isLoading, isValidating, mutate } = useSWR(GET_ENDPOINT, dataFetch);
 
   React.useEffect(() => {
-    mutate();
+    mutate([]);
   }, [name, code]);
 
   const dataAdd = React.useCallback(async (newEntryInput) => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import Card from '../Card';
 import { Typography, CardContent, Card as MUICard, CardHeader, IconButton } from '@mui/material';
 
 import * as d3 from "d3";
