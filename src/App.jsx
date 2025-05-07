@@ -4,15 +4,14 @@ import LoggedInfo from './components/LoggedInfo';
 import AuthForm from './components/AuthForm';
 import Dialog from './components/Dialog';
 import CardsPanel from './components/CardsPanel'
-import Card from './components/Card'
 import { AuthContext } from './components/AuthProvider';
 import { DataContext } from './components/DataProvider';
 
 import useToggle from './hooks/use-toggle';
 
 import NewEntryDialog from './components/NewEntryDialog/NewEntryDialog';
-import { Flex } from '@radix-ui/themes';
 import RegisterCard from './components/RegisterCard/RegisterCard';
+import { CircularProgress } from '@mui/material';
 
 function App() {
   const { name } = React.useContext(AuthContext)
@@ -39,11 +38,14 @@ function App() {
           </Dialog>
       }
       <CardsPanel>
-        <NewEntryDialog
-          loading={isLoading || isValidating}
-          />
         {
-          data?.map((d) => <RegisterCard data={d}/>)
+          (isLoading || isValidating || error) ? 
+          <CircularProgress /> 
+          :
+          <NewEntryDialog />
+        }
+        {
+          data?.map((d) => <RegisterCard key={d.id} data={d}/>)
         }
       </CardsPanel>
       

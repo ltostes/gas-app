@@ -6,21 +6,47 @@ import { APIdataFetch, APIdataSet, GET_ENDPOINT } from '../../aux/APIHandler';
 
 export const DataContext = React.createContext();
 
+const dataParser = ({
+  id,
+  date,
+  station,
+  gasType,
+  cost,
+  liters,
+  kilometers,
+  efficiency
+}) => ({
+  id,
+  date: new Date(date),
+  station,
+  gasType,
+  cost: +cost,
+  liters: +liters,
+  kilometers: +kilometers,
+  efficiency: +efficiency
+});
+
 function DataProvider({children}) {
   const { name, code } = React.useContext(AuthContext)
 
   const dataFetch = React.useCallback(async () => {
-    const ret = await APIdataFetch({name, code});
+    const raw = await APIdataFetch({name, code});
+
+    const ret = raw?.map(dataParser)
+    console.log({raw, ret})
+
     return ret;
   },[name, code]);
 
   const {data, error, isLoading, isValidating, mutate } = useSWR(GET_ENDPOINT, dataFetch);
 
   React.useEffect(() => {
-    mutate();
+    mutate([]);
   }, [name, code]);
 
-  const dataAdd = React.useCallback(async (newEntry) => {
+  const dataAdd = React.useCallback(async (newEntryInput) => {
+    const id = crypto.randomUUID();
+    const newEntry = {id, ...newEntryInput};
     const nextData = data ? [...data, newEntry] : [newEntry]
     await APIdataSet({data: nextData, name, code});
     mutate(nextData);
