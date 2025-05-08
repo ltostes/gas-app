@@ -49,6 +49,7 @@ function App() {
         <Collapse in={showInfo}>
           <Paper elevation={8}>
             <Alert
+              severity='info'
               action={
                 <IconButton
                   aria-label="close"
