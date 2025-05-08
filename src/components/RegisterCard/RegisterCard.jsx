@@ -58,7 +58,7 @@ function RegisterCard({data}) {
                 gap:1
               }}
               >
-              <Chip label={`R$${d3.format('.2f')(metrics.price)}`} />
+              <Chip label={`R$ ${d3.format('.2f')(metrics.price)} /L`} />
               {metrics.runkm && <Chip label={`${d3.format('.0f')(metrics.runkm)} km`} />}
               {metrics.c_efficiency && <Chip label={`${d3.format('.1f')(metrics.c_efficiency)} km/L`} />}
             </Box>
