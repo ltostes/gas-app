@@ -22,7 +22,7 @@ function RegisterCard({data}) {
   const formattedDate = d3.timeFormat('%Y-%m-%d')(date);
 
   return (
-    <MUICard sx={{minWidth: 250, minHeight: `${minHeight}em`}}>
+    <MUICard sx={{minWidth: 300, minHeight: `${minHeight}em`}}>
       <CardContent>
       <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
         {formattedDate}
