@@ -13,8 +13,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { IconButton, Button as MUIButton, Stack } from '@mui/material';
 import { Add } from '@mui/icons-material';
 
-import Button from '../Button';
-
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import { DataContext } from '../DataProvider';
@@ -149,7 +147,7 @@ function NewEntryDialog({ loading }) {
           <TextField 
             label='Total Pago'
             margin='normal'
-            placeholder='0,00'
+            placeholder='0.00'
             value={cost}
             onChange={(event) => setCost(event.target.value)}
             type='number'
@@ -169,7 +167,7 @@ function NewEntryDialog({ loading }) {
             label='Litros abastecidos'
             margin='normal'
             type='number'
-            placeholder='0,000'
+            placeholder='0.000'
             value={liters}
             onChange={(event) => setLiters(event.target.value)}
             slotProps={{

@@ -21,8 +21,7 @@ function App() {
 
   const [showInfo, setShowInfo] = useState(false);
 
-
-  useDelay(() => setShowInfo(true), 200);
+  // useDelay(() => setShowInfo(true), 200);
 
   return (
     <>
