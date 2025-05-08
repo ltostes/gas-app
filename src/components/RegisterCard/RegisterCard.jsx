@@ -15,8 +15,6 @@ function RegisterCard({data}) {
     efficiency
   } = data;
 
-  console.log({data})
-
   const minHeight = efficiency ? 13 : 12
 
   const formattedDate = d3.timeFormat('%Y-%m-%d')(date);

@@ -33,7 +33,6 @@ function DataProvider({children}) {
     const raw = await APIdataFetch({name, code});
 
     const ret = {...raw, list: raw?.list.map(itemParser)}
-    console.log({raw, ret})
 
     return ret;
   },[name, code]);
