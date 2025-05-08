@@ -64,7 +64,7 @@ function App() {
               }
               sx={{ mb: 2 }}
             >
-              <AlertTitle>Você sabia?</AlertTitle>
+              {/* <AlertTitle>Você sabia?</AlertTitle> */}
               Nós teremos infos e dicas aqui como qual foi o posto mais barato no último mês
             </Alert>
           </Paper>
