@@ -33,7 +33,7 @@ function NewEntryDialog({ loading }) {
   const handleClickOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { data, dataAdd } = React.useContext(DataContext)
+  const { list, dataAdd } = React.useContext(DataContext)
   const today = new Date();
 
   const stdValues = React.useMemo(() => ({date: today, station: '', cost: '', liters: '', kilometers: '', gasType: gasTypeStdOptions[0], efficiency: ''}),[])
@@ -64,7 +64,7 @@ function NewEntryDialog({ loading }) {
     handleClose();
   }
 
-  const isSubmittable = (
+  const isSubmittable = !!(
       true
       && station
       && cost > 0
@@ -73,12 +73,12 @@ function NewEntryDialog({ loading }) {
   )
 
   const stationOptions = React.useMemo(() => {
-    const rawStations = data?.map(({station}) => station).filter(f => f);
+    const rawStations = list?.map(({station}) => station).filter(f => f);
     const uniqueStations = [...new Set(rawStations)];
 
     return uniqueStations
   }
-  , [data]);
+  , [list]);
 
   return (
     <>

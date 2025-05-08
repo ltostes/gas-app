@@ -21,8 +21,9 @@ import * as d3 from 'd3'
 
 function App() {
   const { name } = React.useContext(AuthContext)
-  const { data, error, isLoading, isValidating} = React.useContext(DataContext)
-  
+  const { list , error, isLoading, isValidating} = React.useContext(DataContext)
+
+
   const [showAuthDialog, toggleAuthDialog, setShowAuthDialog] = useToggle(false);
   const [showInfo, setShowInfo] = useState(false);
   

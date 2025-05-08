@@ -6,7 +6,7 @@ import { APIdataFetch, APIdataSet, GET_ENDPOINT } from '../../aux/APIHandler';
 
 export const DataContext = React.createContext();
 
-const dataParser = ({
+const itemParser = ({
   id,
   date,
   station,
@@ -32,7 +32,7 @@ function DataProvider({children}) {
   const dataFetch = React.useCallback(async () => {
     const raw = await APIdataFetch({name, code});
 
-    const ret = raw?.map(dataParser)
+    const ret = {...raw, list: raw?.list.map(itemParser)}
     console.log({raw, ret})
 
     return ret;
@@ -47,13 +47,14 @@ function DataProvider({children}) {
   const dataAdd = React.useCallback(async (newEntryInput) => {
     const id = crypto.randomUUID();
     const newEntry = {id, ...newEntryInput};
-    const nextData = data ? [...data, newEntry] : [newEntry]
+    const nextData = data.list ? {...data, list: [...data.list, newEntry]} : {list: [newEntry]}
     await APIdataSet({data: nextData, name, code});
     mutate(nextData);
   },[name, code, data]);
 
   const ctx = {
     data,
+    list: data?.list,
     dataAdd,
     isLoading,
     isValidating,
