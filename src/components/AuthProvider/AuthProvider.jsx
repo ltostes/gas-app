@@ -24,11 +24,14 @@ function AuthProvider({ children }) {
     localStorage.setItem('code', inputCode);
     localStorage.setItem('name', inputName);
   }
+  
+  const isLogged = React.useMemo(() => !(name == ''), [name]);
 
   const ctx = {
     code,
     name,
-    saveAuth
+    saveAuth,
+    isLogged
   };
 
   return (

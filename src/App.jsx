@@ -1,53 +1,32 @@
 import React, { useState } from 'react'
 
-import LoggedInfo from './components/LoggedInfo';
-import AuthForm from './components/AuthForm';
-import Dialog from './components/Dialog';
 import CardsPanel from './components/CardsPanel'
+import AuthDialog from './components/AuthDialog/AuthDialog';
 import { AuthContext } from './components/AuthProvider';
 import { DataContext } from './components/DataProvider';
 
-import useToggle from './hooks/use-toggle';
 import useDelay from './hooks/use-delay';
 
 import NewEntryDialog from './components/NewEntryDialog/NewEntryDialog';
 import RegisterCard from './components/RegisterCard/RegisterCard';
 
-import { Alert, AlertTitle, Paper, Box, Button, Collapse, IconButton, Badge, Tooltip } from '@mui/material';
+import { Alert, Paper, Box, Button, Collapse, IconButton, Badge, Tooltip } from '@mui/material';
 import { Close, LocalGasStation, AttachMoney, CalendarMonthOutlined } from '@mui/icons-material';
-import { Dialog as MUIDialog } from '@mui/material';
 
 import * as d3 from 'd3'
 
 function App() {
-  const { name } = React.useContext(AuthContext)
+  const { name, isLogged } = React.useContext(AuthContext)
   const { list , error, isLoading, isValidating} = React.useContext(DataContext)
 
-
-  const [showAuthDialog, toggleAuthDialog, setShowAuthDialog] = useToggle(false);
   const [showInfo, setShowInfo] = useState(false);
-  
-  const isLogged = React.useMemo(() => !(name == ''), [name]);
 
-  React.useEffect(() => {
-    setShowAuthDialog(!isLogged);
-  }, [isLogged])
 
   useDelay(() => setShowInfo(true), 200);
 
   return (
     <>
-      <LoggedInfo callback={toggleAuthDialog}/>
-      <MUIDialog
-        open={showAuthDialog}
-        onClose={() => isLogged && toggleAuthDialog()}
-      >
-        <Box
-          padding={5}
-        >
-          <AuthForm submitCallback={toggleAuthDialog}/>
-        </Box>
-      </MUIDialog>
+      <AuthDialog />
       <CardsPanel>
         <Collapse in={showInfo}>
           <Paper elevation={8}>

@@ -17,6 +17,9 @@ function LoggedInfo({callback}) {
         color='secondary'
         variant='outlined'
         onClick={callback}
+        sx={{
+          backgroundColor: (theme) => theme.palette.primary.main
+        }}
         >
         <strong>{name || 'Loading...'}</strong>
       </Button>
