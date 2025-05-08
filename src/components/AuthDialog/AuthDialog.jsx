@@ -71,7 +71,7 @@ function AuthDialog() {
         Olá
       </Typography>
       <Typography variant='subtitle2'>
-        O <i><strong>GasApp</strong></i> te espera{inputName ? `, ${inputName}!` : ''}
+        O <i><strong>GasApp</strong></i> te espera{inputName ? `, ${inputName}!` : '!'}
       </Typography>
     </>)
   }
