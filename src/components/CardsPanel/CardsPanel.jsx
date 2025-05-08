@@ -7,8 +7,6 @@ function CardsPanel({ children }) {
         sx={{
           backgroundColor: (theme) => theme.palette.primary.main
         }}
-        fixed
-        disableGutters
         style={{
           // width: '100%',
           minHeight: '100vh',
