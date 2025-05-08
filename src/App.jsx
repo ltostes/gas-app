@@ -17,6 +17,8 @@ import { Alert, AlertTitle, Paper, Box, Button, Collapse, IconButton, Badge, Too
 import { Close, LocalGasStation, AttachMoney, CalendarMonthOutlined } from '@mui/icons-material';
 import { Dialog as MUIDialog } from '@mui/material';
 
+import * as d3 from 'd3'
+
 function App() {
   const { name } = React.useContext(AuthContext)
   const { data, error, isLoading, isValidating} = React.useContext(DataContext)
@@ -126,9 +128,11 @@ function App() {
             </div>
           </Tooltip>
         </Box>
-        
         {
-          data?.map((d) => <RegisterCard key={d.id} data={d}/>)
+          list && (
+            list.sort((a,b) => d3.descending(a.date, b.date))
+                .map((d) => <RegisterCard key={d.id} data={d}/>)
+          )
         }
       </CardsPanel>
       
