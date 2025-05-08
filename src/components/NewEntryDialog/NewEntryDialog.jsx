@@ -36,7 +36,7 @@ function NewEntryDialog({ loading }) {
   const { data, dataAdd } = React.useContext(DataContext)
   const today = new Date();
 
-  const stdValues = React.useMemo(() => ({date: today, station: '', cost: 0, liters: 0, kilometers: 0, gasType: gasTypeStdOptions[0], efficiency: ''}),[])
+  const stdValues = React.useMemo(() => ({date: today, station: '', cost: '', liters: '', kilometers: '', gasType: gasTypeStdOptions[0], efficiency: ''}),[])
 
   const [date, setDate] = React.useState(stdValues.date);
   const [station, setStation] = React.useState(stdValues.station);
