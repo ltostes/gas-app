@@ -10,6 +10,7 @@ import { amber, indigo } from '@mui/material/colors';
 
 import AuthProvider from './components/AuthProvider';
 import DataProvider from './components/DataProvider';
+import MetricsProvider from './components/MetricsProvider';
 
 const customTheme = createTheme({
   palette: {
@@ -22,12 +23,14 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
       <DataProvider>
-        <ThemeProvider
-          theme={customTheme}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}> {/* Required for the date picker */}
-            <App />
-          </LocalizationProvider>
-        </ThemeProvider>
+        <MetricsProvider>
+          <ThemeProvider
+            theme={customTheme}>
+            <LocalizationProvider dateAdapter={AdapterDateFns}> {/* Required for the date picker */}
+              <App />
+            </LocalizationProvider>
+          </ThemeProvider>
+        </MetricsProvider>
       </DataProvider>
     </AuthProvider>
   </StrictMode>
