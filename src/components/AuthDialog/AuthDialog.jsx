@@ -129,6 +129,7 @@ function AuthDialog() {
                 />
               <Box>
                 <Tooltip
+                  enterTouchDelay={0}
                   title={<span>
                           Este código é um identificador para os seus registros, salve em algum lugar para não esquecer.
                           <br/> <i>(Talvez mandando mensagem pra si mesmo no zap?)</i>

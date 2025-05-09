@@ -32,7 +32,7 @@ function DataProvider({children}) {
   const dataFetch = React.useCallback(async () => {
     const raw = await APIdataFetch({name, code});
 
-    const ret = {...raw, list: raw?.list.map(itemParser)}
+    const ret = {...raw, list: !raw ? [] : raw.list.map(itemParser)}
 
     return ret;
   },[name, code]);
