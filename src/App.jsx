@@ -6,11 +6,13 @@ import { AuthContext } from './components/AuthProvider';
 import { DataContext } from './components/DataProvider';
 
 import useDelay from './hooks/use-delay';
+import useToggle from './hooks/use-toggle';
 
 import NewEntryDialog from './components/NewEntryDialog/NewEntryDialog';
 import RegisterCard from './components/RegisterCard/RegisterCard';
+import Last30DaysSummary from './components/Last30DaysSummary/Last30DaysSummary';
 
-import { Alert, Paper, Box, Button, Collapse, IconButton, Badge, Tooltip } from '@mui/material';
+import { Alert, Paper, Box, Button, Collapse, IconButton, Badge, Tooltip, Typography } from '@mui/material';
 import { Close, LocalGasStation, AttachMoney, CalendarMonthOutlined } from '@mui/icons-material';
 
 import * as d3 from 'd3'
@@ -19,7 +21,8 @@ function App() {
   const { name, isLogged } = React.useContext(AuthContext)
   const { list , error, isLoading, isValidating} = React.useContext(DataContext)
 
-  const [showInfo, setShowInfo] = useState(false);
+  const [showInfo, toggleShowInfo] = useToggle(false);
+  const [showLast30daysSummary, toggleLast30daysSummary] = useToggle(true);
 
   // useDelay(() => setShowInfo(true), 200);
 
@@ -27,31 +30,7 @@ function App() {
     <>
       <AuthDialog />
       <CardsPanel>
-        <Collapse in={showInfo}>
-          <Paper elevation={8}>
-            <Alert
-              severity='info'
-              action={
-                <IconButton
-                  aria-label="close"
-                  color="inherit"
-                  size="small"
-                  onClick={() => {
-                    setShowInfo(false);
-                  }}
-                >
-                  <Close fontSize="inherit" />
-                </IconButton>
-              }
-              sx={{ mb: 2 }}
-            >
-              {/* <AlertTitle>Você sabia?</AlertTitle> */}
-              Nós teremos infos e dicas aqui como qual foi o posto mais barato no último mês
-            </Alert>
-          </Paper>
-        </Collapse>
-        
-        <Box
+        <Box // Buttons panel
           sx={{
             display:'flex',
             flexDirection:'row',
@@ -80,6 +59,7 @@ function App() {
             <div>
           <IconButton
             disabled
+            // onClick={toggleShowInfo}
             color='secondary'
           >
             <Badge
@@ -91,11 +71,24 @@ function App() {
           </IconButton>
             </div>
           </Tooltip>
-          <Tooltip title={`A visão de calendário ainda está em desenvolvimento`}>
+          <Tooltip title={`Estatísticas dos últimos 30 dias`}>
             <div>
               <IconButton
                 disabled
                 color='secondary'
+                sx={
+                  showLast30daysSummary && {
+                    color: 'primary.main',
+                    bgcolor: 'secondary.main',
+                    transition: 'all 0.3s ease',
+                    transform: 'scale(1.1)',
+                    '&:hover': {
+                      bgcolor: 'secondary.main',
+                      color: 'primary.main',
+                      transform: 'scale(1.0)'
+                    }}
+                }
+                onClick={toggleLast30daysSummary}
                 >
                 <Badge
                   badgeContent={0}
@@ -107,6 +100,9 @@ function App() {
             </div>
           </Tooltip>
         </Box>
+        <Collapse in={showLast30daysSummary}>
+         {/* <Last30DaysSummary /> */}
+        </Collapse>
         {
           list && (
             list.sort((a,b) => d3.descending(a.date, b.date))

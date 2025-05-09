@@ -55,11 +55,11 @@ function NewEntryDialog({ loading }) {
   }
 
   function handleSubmit(event) {
+    handleClose();
     event.preventDefault();
     const newEntry = {date, station, cost, liters, kilometers, gasType, efficiency};
     dataAdd(newEntry);
     clearFields();
-    handleClose();
   }
 
   const isSubmittable = !!(

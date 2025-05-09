@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, CardContent, Card as MUICard, CardHeader, IconButton, Box, Chip } from '@mui/material';
+import { Typography, CardContent, Card as MUICard, CardHeader, IconButton, Box, Chip, Divider } from '@mui/material';
 
 import { MetricsContext } from '../MetricsProvider';
 
@@ -20,6 +20,7 @@ function RegisterCard({data}) {
 
   // Calculated metrics
   const { get_metrics_by_id } = React.useContext(MetricsContext);
+
   const metrics = get_metrics_by_id(id);
 
   const minHeight = efficiency ? 13 : 12
@@ -31,7 +32,13 @@ function RegisterCard({data}) {
       <CardContent>
         <Box
           sx={{
-            position:'relative'
+            display:'flex',
+            flexDirection:'column',
+            gap: 1
+          }}>
+        <Box
+          sx={{
+            position:'relative',
           }}>
           <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
             {formattedDate}
@@ -51,7 +58,7 @@ function RegisterCard({data}) {
             <Box
               sx={{
                 position: 'absolute',
-                bottom: -10,
+                bottom: 0,
                 right: -5,
                 display:'flex',
                 flexDirection:'column',
@@ -59,9 +66,25 @@ function RegisterCard({data}) {
               }}
               >
               <Chip label={`R$ ${d3.format('.2f')(metrics.price)} /L`} />
-              {metrics.runkm && <Chip label={`${d3.format('.0f')(metrics.runkm)} km`} />}
-              {metrics.c_efficiency && <Chip label={`${d3.format('.1f')(metrics.c_efficiency)} km/L`} />}
             </Box>
+            </Box>
+            {
+              !metrics.is_first && <>
+                <Divider flexItem/>
+                {/* <Typography>Test</Typography> */}
+                <Box
+                  sx={{
+                    display:'flex',
+                    justifyContent:'center',
+                    gap: 1
+                  }}
+                >
+                  <Chip label={`${d3.format('.1f')(metrics.c_efficiency)} km/L`} />
+                  <Chip label={`${d3.format('.0f')(metrics.runkm)} km`} />
+                  <Chip label={`${metrics.days_passed} dias`} />
+                </Box>
+              </>
+            }
           </Box>
       </CardContent>
     </MUICard>
