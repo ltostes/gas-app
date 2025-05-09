@@ -70,9 +70,16 @@ function AuthDialog() {
       <Typography variant='h5'>
         Olá
       </Typography>
+      {!isLogged &&
       <Typography variant='subtitle2'>
         O <i><strong>GasApp</strong></i> te espera{inputName ? `, ${inputName}!` : '!'}
       </Typography>
+      }
+      {isLogged &&
+      <Typography variant='subtitle2'>
+        Aproveite o <i><strong>GasApp</strong></i>{inputName ? `, ${inputName}!` : '!'}
+      </Typography>
+      }
     </>)
   }
 
