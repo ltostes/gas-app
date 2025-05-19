@@ -4,7 +4,7 @@ import styles from './NewEntryDialog.module.css'
 import * as d3 from "d3";
 
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -24,6 +24,8 @@ const gasTypeStdOptions = [
 ]
 
 const inputSizeStd = 'small';
+
+const filter = createFilterOptions();
 
 function NewEntryDialog({ loading }) {
   // Dialog handling
@@ -126,7 +128,47 @@ function NewEntryDialog({ loading }) {
             freeSolo
             options={stationOptions}
             value={station}
-            onChange={(event, newValue) => setStation(newValue)}
+            onChange={(event, newValue) => {
+              if (typeof newValue === 'string') {
+                setStation(newValue);
+              } else if (newValue && newValue.inputValue) {
+                console.log(newValue)
+                // Create a new value from the user input
+                setStation(newValue.inputValue);
+              } else {
+                setStation(newValue);
+              }
+            }}
+            filterOptions={(options, params) => {
+              const filtered = filter(options, params);
+
+              const { inputValue } = params;
+              // Suggest the creation of a new value
+              const isExisting = options.some((option) => inputValue === option);
+              if (inputValue !== '' && !isExisting) {
+                filtered.push({
+                  inputValue,
+                  label: `Adicionar "${inputValue}"`
+                });
+              }
+
+              return filtered;
+            }}
+            getOptionLabel={(option) => {
+              // Value selected with enter, right from the input
+              if (typeof option === 'string') {
+                return option;
+              }
+              // Add "xxx" option created dynamically
+              if (option.inputValue) {
+                return option.label;
+              }
+              // Regular option
+              return option;
+            }}
+            selectOnFocus
+            clearOnBlur
+            handleHomeEndKeys
             renderInput={(params) => <TextField 
               {...params}
               label="Em qual posto foi abastecido?" 
