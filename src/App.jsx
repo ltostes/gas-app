@@ -30,7 +30,6 @@ function App() {
   
   // Setting hint for when there's no data available
   React.useEffect(() => {
-    console.log('TRIED: ',{list})
     if (isLoading || isValidating || typeof list == 'undefined' || list.length > 0) {
       dismissInfo();
       return;
